@@ -1,0 +1,21 @@
+{
+    "name": "gastons26/hop-microservice",
+    "description": "HoP microservcie base for starting development",
+    "type": "yii2-extension",
+    "keywords": ["hop"," microservice"," base-routes"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gatis.Lapsins",
+            "email": "gatis.lapsins@gmail.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "hop\\microservice\\": ""
+        }
+    }
+}
