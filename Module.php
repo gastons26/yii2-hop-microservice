@@ -13,6 +13,11 @@ class Module extends \yii\base\Module implements BootstrapInterface
     public $controllerNamespace = 'hop\microservice\controllers';
 
     /**
+     * @var string - application secret key
+     */
+    public $secretKey = "";
+
+    /**
      * @var array => application registration infromation
      */
     public $registrationConfig;
@@ -42,15 +47,23 @@ class Module extends \yii\base\Module implements BootstrapInterface
      */
     public function bootstrap($app)
     {
-        $app->getUrlManager()->addRules([
-            ['class' => 'yii\web\UrlRule', 'pattern' => 'api/'.$this->id.'/ping', 'route' => $this->id.'/main/ping'],
-            ['class' => 'yii\web\UrlRule', 'pattern' => 'api/'.$this->id.'/lazy', 'route' => $this->id.'/file/lazy'],
 
-            ['class' => 'yii\web\UrlRule', 'pattern' => 'api/'.$this->id.'/boot/files/javascript', 'route' => $this->id.'/file/javascript'],
-            ['class' => 'yii\web\UrlRule', 'pattern' => 'api/'.$this->id.'/boot/files/css', 'route' => $this->id.'/file/css'],
+        if ($app instanceof \yii\console\Application) {
+            $app->controllerMap[$this->id] = [
+                'class' => 'hop\microservice\console\RegistrationController',
+                'module' => $this,
+            ];
+        } else {
+            $app->getUrlManager()->addRules([
+                ['class' => 'yii\web\UrlRule', 'pattern' => 'api/'.$this->id.'/ping', 'route' => $this->id.'/main/ping'],
+                ['class' => 'yii\web\UrlRule', 'pattern' => 'api/'.$this->id.'/lazy', 'route' => $this->id.'/file/lazy'],
 
-            ['class' => 'yii\web\UrlRule', 'pattern' => $this->id.'/fello', 'route' => $this->id.'/default/ping'],
-        ], false);            
+                ['class' => 'yii\web\UrlRule', 'pattern' => 'api/'.$this->id.'/boot/files/javascript', 'route' => $this->id.'/file/javascript'],
+                ['class' => 'yii\web\UrlRule', 'pattern' => 'api/'.$this->id.'/boot/files/css', 'route' => $this->id.'/file/css'],
+
+                ['class' => 'yii\web\UrlRule', 'pattern' => $this->id.'/fello', 'route' => $this->id.'/default/ping'],
+            ], false);
+        }
     }
 
 }
