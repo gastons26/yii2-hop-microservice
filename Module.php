@@ -47,8 +47,9 @@ class Module extends \yii\base\Module implements BootstrapInterface
      */
     public function bootstrap($app)
     {
-
         if ($app instanceof \yii\console\Application) {
+            \Yii::setAlias('webroot',dirname($_SERVER['SCRIPT_FILENAME']));
+
             $app->controllerMap[$this->id] = [
                 'class' => 'hop\microservice\console\RegistrationController',
                 'module' => $this,
