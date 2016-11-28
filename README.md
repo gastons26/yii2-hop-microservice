@@ -74,8 +74,8 @@ $config["modules"]["microservice"] = [
 ];
 ```
 
-There are full of stories in web how to hide index.php, but always it's pient in ass to get right code.
-add .htaccess into webroot:
+There are full of stories in web how to hide index.php, but always it's paint in the ass to get right code.
+Add .htaccess into webroot:
 ```
 RewriteEngine on
 # If a directory or a file exists, use it directly
@@ -104,4 +104,4 @@ $config["modules"]["microservice"] = [
 ];
 ```
 
-Once registration done start develop. In webroot write your angular code!!
+Once registration done start develop. In webroot write your Angular code!!
